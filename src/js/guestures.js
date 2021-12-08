@@ -128,7 +128,7 @@
 
     self.destroy();
 
-    self.$container.on("touchstart.fb.touch mousedown.fb.touch", $.proxy(self, "ontouchstart"));
+    self.$container.on("touchstart.fb.touch mousedown.fb.touch", $.proxy(self, "ontouchstart"), { passive: true });
   };
 
   Guestures.prototype.destroy = function () {
@@ -233,8 +233,8 @@
 
     $(document)
       .off(".fb.touch")
-      .on(isTouchDevice ? "touchend.fb.touch touchcancel.fb.touch" : "mouseup.fb.touch mouseleave.fb.touch", $.proxy(self, "ontouchend"))
-      .on(isTouchDevice ? "touchmove.fb.touch" : "mousemove.fb.touch", $.proxy(self, "ontouchmove"));
+      .on(isTouchDevice ? "touchend.fb.touch touchcancel.fb.touch" : "mouseup.fb.touch mouseleave.fb.touch", $.proxy(self, "ontouchend"), { passive: true })
+      .on(isTouchDevice ? "touchmove.fb.touch" : "mousemove.fb.touch", $.proxy(self, "ontouchmove"), { passive: true });
 
     if ($.fancybox.isMobile) {
       document.addEventListener("scroll", self.onscroll, true);
@@ -694,9 +694,9 @@
       // Continue vertical movement
       $.fancybox.animate(
         self.instance.current.$slide, {
-          top: self.sliderStartPos.top + self.distanceY + self.velocityY * 150,
-          opacity: 0
-        },
+        top: self.sliderStartPos.top + self.distanceY + self.velocityY * 150,
+        opacity: 0
+      },
         200
       );
       ret = self.instance.close(true, 250);
@@ -865,9 +865,9 @@
     } else if (
       instance.current.$content &&
       instance.current.$content
-      .find($target)
-      .addBack()
-      .filter($target).length
+        .find($target)
+        .addBack()
+        .filter($target).length
     ) {
       where = "Content";
     } else {

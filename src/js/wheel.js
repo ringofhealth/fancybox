@@ -37,5 +37,5 @@
         instance[(-e.deltaY || -e.deltaX || e.wheelDelta || -e.detail) < 0 ? "next" : "previous"]();
       });
     }
-  });
+  }, { passive: true });
 })(document, jQuery);

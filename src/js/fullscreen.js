@@ -142,7 +142,7 @@
           e.preventDefault();
 
           FullScreen.toggle();
-        });
+        }, { passive: true });
 
         if (instance.opts.fullScreen && instance.opts.fullScreen.autoStart === true) {
           FullScreen.request();

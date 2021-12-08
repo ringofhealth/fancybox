@@ -871,23 +871,23 @@
           e.preventDefault();
 
           self.close(e);
-        })
+        }, { passive: true })
         .on("touchstart.fb-prev click.fb-prev", "[data-fancybox-prev]", function (e) {
           e.stopPropagation();
           e.preventDefault();
 
           self.previous();
-        })
+        },{ passive: true })
         .on("touchstart.fb-next click.fb-next", "[data-fancybox-next]", function (e) {
           e.stopPropagation();
           e.preventDefault();
 
           self.next();
-        })
+        },{ passive: true })
         .on("click.fb", "[data-fancybox-zoom]", function (e) {
           // Click handler for zoom button
           self[self.isScaledDown() ? "scaleToActual" : "scaleToFit"]();
-        });
+        },{ passive: true });
 
       // Handle page scrolling and browser resizing
       // ==========================================
@@ -968,7 +968,7 @@
         }
 
         self.trigger("afterKeydown", e, keycode);
-      });
+      }, { passive: true });
 
       // Hide controls after some inactivity period
       if (self.group[self.currIndex].opts.idleTime) {
